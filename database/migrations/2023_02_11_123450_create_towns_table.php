@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('towns', function (Blueprint $table) {
             $table->id();
             $table->foreignId('state_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('town', 100);
         });
     }
 

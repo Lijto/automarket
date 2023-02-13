@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{route('home')}}">{{config('app.name')}}</a>
+        <a class="navbar-brand" href="{{route('home')}}"><h1>{{config('app.name')}}</h1></a>
         <div
             class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
             @if (Route::has('login'))
