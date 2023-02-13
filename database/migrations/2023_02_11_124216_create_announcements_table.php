@@ -28,7 +28,7 @@ return new class extends Migration
             $table->unsignedMediumInteger('car_kilometres');
             $table->unsignedTinyInteger('owners_count');
             $table->foreignId('year_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->decimal('prise');
+            $table->decimal('price');
             $table->text('text');
             $table->timestamps();
         });
