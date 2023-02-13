@@ -1,20 +1,73 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('main');
 
-    <title>{{config('app.name')}}</title>
+@section('content')
+    @foreach($announcements as $announcement)
+        <div class="card mt-3">
+            <div class="card-header">
+                {{__('Дата публикации')}}: {{$announcement->created_at->format('Y')}}
+                {{__('Город')}}: {{$announcement->town->town}}
+                {{__('Марка')}}: {{$announcement->vehicleName->name}}
+                {{__('Модель')}}: {{$announcement->vehicleModel->model}}
+                {{__('Год выпуска')}}: {{$announcement->year->year}}
+                {{__('Пробег')}}: {{$announcement->car_kilometres}}
+                {{__('Стоимость')}}: {{$announcement->price}}
+            </div>
+            <div class="card-body" style="height: 300px">
+                <div class="d-flex col-12">
+                    <div class="text-center col-6">
+                        <div id="carouselExampleIndicators" class="carousel slide" style="height: 290px">
+                            <div class="carousel-indicators">
+                                @foreach($announcement->photos as $photo)
+                                    @if($loop->first)
+                                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                                                data-bs-slide-to="{{$loop->index}}"
+                                                class="active" aria-current="true"
+                                                aria-label="Slide {{$loop->index}}"></button>
+                                    @else
+                                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                                                data-bs-slide-to="{{$loop->index}}"
+                                                aria-label="Slide {{($loop->index)}}"></button>
+                                    @endif
 
-    <!-- Fonts -->
-    <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+                                @endforeach
+                            </div>
+                            <div class="carousel-inner" style="height: 250px">
+                                @foreach($announcement->photos as $photo)
+                                    @if ($loop->first)
+                                        <div class="carousel-item active">
+                                            <img src="{{Storage::url($photo->link)}}" class="img-fluid img-thumbnail"
+                                                 alt="...">
+                                        </div>
+                                    @else
+                                        <div class="carousel-item">
+                                            <img src="{{Storage::url($photo->link)}}" class="img-fluid img-thumbnail"
+                                                 alt="...">
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                            <button class="carousel-control-prev" type="button"
+                                    data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                    data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="text-center col-6">
+                        {{$announcement->text}}
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                {{__('Продавец')}}: {{$announcement->user->name}}
+                {{__('Электронная почта')}}: {{$announcement->user->email}}
+            </div>
+        </div>
+    @endforeach
 
-    <!-- Styles -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="antialiased">
-@include('components.navbar')
-</body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.min.js"
-        crossorigin="anonymous"></script>
-</html>
+@endsection
