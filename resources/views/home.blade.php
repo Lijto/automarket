@@ -35,13 +35,19 @@
                                 @foreach($announcement->photos as $photo)
                                     @if ($loop->first)
                                         <div class="carousel-item active">
-                                            <img src="{{Storage::url($photo->link)}}" class="img-fluid img-thumbnail"
-                                                 alt="...">
+                                            <a href="{{Storage::url($photo->link)}}" target="_blank">
+                                                <img src="{{Storage::url($photo->link)}}"
+                                                     class="img-fluid img-thumbnail"
+                                                     alt="...">
+                                            </a>
                                         </div>
                                     @else
                                         <div class="carousel-item">
-                                            <img src="{{Storage::url($photo->link)}}" class="img-fluid img-thumbnail"
-                                                 alt="...">
+                                            <a href="{{Storage::url($photo->link)}}" target="_blank">
+                                                <img src="{{Storage::url($photo->link)}}"
+                                                     class="img-fluid img-thumbnail"
+                                                     alt="...">
+                                            </a>
                                         </div>
                                     @endif
                                 @endforeach
