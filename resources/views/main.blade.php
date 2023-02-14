@@ -19,5 +19,6 @@
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.min.js"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+</script>
 </html>

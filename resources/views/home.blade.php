@@ -70,8 +70,16 @@
                 </div>
             </div>
             <div class="card-footer">
+                @guest()
+                    <h6>
+                        {{__('Для просмотра контактов продавца необходимо')}}
+                        <a href="{{route('login')}}">{{__('авторизоваться')}}</a>
+                    </h6>
+                @endguest
+                @auth()
                 {{__('Продавец')}}: {{$announcement->user->name}}
                 {{__('Электронная почта')}}: {{$announcement->user->email}}
+                @endauth
             </div>
         </div>
     @endforeach
