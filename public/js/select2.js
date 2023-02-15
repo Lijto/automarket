@@ -1,3 +1,3 @@
 $(document).ready(function() {
-    $('#mySelect2').select2();
+    $('.select2-here').each(function(){ $(this).select2(); });
 });

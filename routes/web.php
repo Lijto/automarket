@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserAnnouncementController;
+use App\Http\Controllers\VehicleDropzonePhotoController;
 use App\Http\Controllers\VehicleNameController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,8 +30,8 @@ Route::middleware('auth')->group(function () {
 });
 Route::group(['as' => 'vehicle.'], function () {
     Route::get('vehicle-names', [VehicleNameController::class, 'index'])->name('names');
-    Route::post('vehicle-photos', [VehicleNameController::class, 'store'])->name('photos');
-    Route::delete('vehicle-photos-dropzone', [VehicleNameController::class, 'index'])->name('photos.dropzone.destroy');
+    Route::post('vehicle-photos-dropzone', [VehicleDropzonePhotoController::class, 'store'])->name('photos.dropzone.store');
+    Route::delete('vehicle-photos-dropzone', [VehicleDropzonePhotoController::class, 'destroy'])->name('photos.dropzone.destroy');
 });
 
 require __DIR__ . '/auth.php';

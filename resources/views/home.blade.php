@@ -3,32 +3,32 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <select class="js-example-basic-single" name="state">
+            <select class="select2-here" name="state">
                 <option selected>{{__('Область')}}</option>
-                <option value="AL">Alabama</option>
-                <option value="WY">Wyoming</option>
+                <option value="1">Alabama</option>
+                <option value="2">Wyoming</option>
             </select>
-            <select class="js-example-basic-single" name="town">
+            <select class="select2-here" name="town">
                 <option selected>{{__('Город')}}</option>
-                <option value="AL">Alabama</option>
-                <option value="WY">Wyoming</option>
+                <option value="1">Alabama</option>
+                <option value="2">Wyoming</option>
             </select>
-            <select class="js-example-basic-single" name="name">
+            <select class="select2-here" name="name">
                 <option selected>{{__('Марка')}}</option>
-                <option value="AL">Alabama</option>
-                <option value="WY">Wyoming</option>
+                <option value="1">Alabama</option>
+                <option value="2">Wyoming</option>
             </select>
-            <select class="js-example-basic-single" name="model">
+            <select class="select2-here" name="model">
                 <option selected>{{__('Модель')}}</option>
-                <option value="AL">Alabama</option>
-                <option value="WY">Wyoming</option>
+                <option value="1">Alabama</option>
+                <option value="2">Wyoming</option>
             </select>
-            <select class="js-example-basic-single" name="value">
+            <select class="select2-here" name="value">
                 <option selected>{{__('Объем двигателя')}}</option>
-                <option value="AL">Alabama</option>
-                <option value="WY">Wyoming</option>
+                <option value="1">Alabama</option>
+                <option value="2">Wyoming</option>
             </select>
-            <select class="js-example-basic-single" name="km">
+            <select class="select2-here" name="km">
                 <option selected>{{__('Пробег')}}</option>
                 <option value="100000">< 100000 км</option>
                 <option value="150000">100000 - 150000</option>
@@ -37,7 +37,7 @@
                 <option value="AL">Alabama</option>
                 <option value="WY">Wyoming</option>
             </select>
-            <select class="js-example-basic-single" name="owners">
+            <select class="select2-here" name="owners">
                 <option selected>{{__('Кол-во владельцев')}}</option>
                 <option value="1">1</option>
                 <option value="2">2</option>

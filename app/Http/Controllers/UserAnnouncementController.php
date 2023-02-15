@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserAnnouncementRequest;
 use App\Models\Announcement;
 use App\Models\VehiclePhoto;
-use http\Exception;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -32,21 +33,31 @@ class UserAnnouncementController extends Controller
         );
     }
 
+    public function store(StoreUserAnnouncementRequest $request, Announcement $announcement, VehiclePhoto $photo)
+    {
+        $user_id = Auth::id();
+        try {
+            DB::beginTransaction();
+            $createdAnnouncement = $announcement->storeUserAnnouncements($request, $user_id);
+            $photo->storeAnnouncementPhoto($createdAnnouncement->id, $request->photos);
+            DB::commit();
+            return redirect(route('user-announcements.index'));
+        } catch (Exception $exception) {
+            DB::rollBack();
+            Log::error($exception);
+            return redirect()->back();
+        }
+    }
+
     public function destroy($id, Announcement $announcement, VehiclePhoto $photo)
     {
         $announcement = $announcement->where('user_id', Auth::id())->findOrFail($id);
-        $photos = $photo->where('announcement_id', $announcement->id)->get();
-        $photoLinks = [];
-
-        foreach ($photos as $photo) {
-            $photoLinks[] = $photo->link;
-        }
 
         try {
             DB::beginTransaction();
             $photo->where('announcement_id', $announcement->id)->delete();
             $announcement->delete();
-            Storage::delete(array_values($photoLinks));
+            Storage::deleteDirectory('photos/' . $announcement->id);
             DB::commit();
             return redirect(route('user-announcements.index'));
         } catch (\Exception $exception) {

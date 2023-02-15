@@ -94,4 +94,25 @@ class Announcement extends Model
     {
         return $this->where('user_id', $userId);
     }
+
+    public function storeUserAnnouncements($request, $user_id)
+    {
+        $this->user_id = $user_id;
+        $this->state_id = $request->state;
+        $this->town_id = $request->town;
+        $this->vehicle_type_id = $request->vehicle_type;
+        $this->vehicle_name_id = $request->vehicle_name;
+        $this->vehicle_model_id = $request->vehicle_model;
+        $this->fuel_type_id = $request->fuel_type;
+        $this->volume_of_engine_id = $request->volume_of_engine;
+        $this->transmission_id = $request->transmission;
+        $this->color_id = $request->vehicle_color;
+        $this->car_kilometres = $request->kilometres;
+        $this->owners_count = $request->owners;
+        $this->year_id = $request->year;
+        $this->price = $request->price;
+        $this->text = $request->text;
+        $this->save();
+        return $this;
+    }
 }
