@@ -115,4 +115,24 @@ class Announcement extends Model
         $this->save();
         return $this;
     }
+
+    public function getUserAnnouncementForEdit(int $userId, int $id)
+    {
+        return $this
+            ->where('user_id', $userId)
+            ->with([
+                'state',
+                'town',
+                'vehicleType',
+                'vehicleName',
+                'vehicleModel',
+                'fuelType',
+                'volumeOfEngine',
+                'transmission',
+                'color',
+                'year',
+                'photos'
+            ])
+            ->findOrFail($id);
+    }
 }

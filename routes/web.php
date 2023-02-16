@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
 });
 Route::group(['as' => 'vehicle.'], function () {
     Route::get('vehicle-names', [VehicleNameController::class, 'index'])->name('names');
+    Route::get('user-vehicle-photos', [\App\Http\Controllers\VehiclePhotoController::class, 'deleteUserAnnouncementPhoto'])->name('photos.destroy');
     Route::post('vehicle-photos-dropzone', [VehicleDropzonePhotoController::class, 'store'])->name('photos.dropzone.store');
     Route::delete('vehicle-photos-dropzone', [VehicleDropzonePhotoController::class, 'destroy'])->name('photos.dropzone.destroy');
 });

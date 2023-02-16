@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserAnnouncementRequest;
+use App\Http\Requests\UpdateUserAnnouncementRequest;
 use App\Models\Announcement;
 use App\Models\VehiclePhoto;
 use Exception;
@@ -46,6 +47,32 @@ class UserAnnouncementController extends Controller
             DB::rollBack();
             Log::error($exception);
             return redirect()->back();
+        }
+    }
+
+    public function edit($id, Announcement $announcement)
+    {
+        $userId = Auth::id();
+        $userAnnouncement = $announcement->getUserAnnouncementForEdit($userId, $id);
+        return view('announcements.edit', compact('userAnnouncement'));
+    }
+
+    public function update($id, Announcement $announcement, UpdateUserAnnouncementRequest $request)
+    {
+        $userId = Auth::id();
+        $userAnnouncement = $announcement->where('user_id', $userId)->findOrFail($id);
+        try {
+            DB::beginTransaction();
+            $userAnnouncement->storeUserAnnouncements($request, $userId);
+            if ($request->has('photos')) {
+                (new VehiclePhoto())->storeAnnouncementPhoto($userAnnouncement->id, $request->photos);
+            }
+            DB::commit();
+            return redirect(route('user-announcement.edit', $userAnnouncement));
+        } catch (Exception $exception) {
+            DB::rollBack();
+            Log::error($exception);
+            return redirect()->back()->with('error', 'Данные не обновлены!');
         }
     }
 

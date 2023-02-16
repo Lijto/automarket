@@ -36,7 +36,7 @@ class StoreUserAnnouncementRequest extends FormRequest
             'kilometres' => ['required', 'integer'],
             'owners' => ['required', 'integer'],
             'year' => ['required', 'integer', 'exists:years,id'],
-            'price' => ['required', 'integer'],
+            'price' => ['required', 'decimal:2'],
             'text' => ['required', 'string', 'max:5000'],
             'photos' => ['required', 'array'],
             'photos.*' => ['required', 'string', 'max:300']
