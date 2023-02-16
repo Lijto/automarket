@@ -46,7 +46,7 @@
             </select>
         </div>
     </div>
-    @foreach($announcements as $announcement)
+    @foreach($announcements as $key => $announcement)
         <div class="card mt-3">
             <div class="card-header">
                 {{__('Дата публикации')}}: {{$announcement->created_at->format('Y')}}
@@ -60,16 +60,16 @@
             <div class="card-body" style="height: 300px">
                 <div class="d-flex col-12">
                     <div class="text-center col-6">
-                        <div id="carouselExampleIndicators" class="carousel slide" style="height: 290px">
+                        <div id="carouselExampleIndicators-{{$key}}" class="carousel slide" style="height: 290px">
                             <div class="carousel-indicators">
                                 @foreach($announcement->photos as $photo)
                                     @if($loop->first)
-                                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                                        <button type="button" data-bs-target="#carouselExampleIndicators-{{$key}}"
                                                 data-bs-slide-to="{{$loop->index}}"
                                                 class="active" aria-current="true"
                                                 aria-label="Slide {{$loop->index}}"></button>
                                     @else
-                                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                                        <button type="button" data-bs-target="#carouselExampleIndicators-{{$key}}"
                                                 data-bs-slide-to="{{$loop->index}}"
                                                 aria-label="Slide {{($loop->index)}}"></button>
                                     @endif
@@ -98,12 +98,12 @@
                                 @endforeach
                             </div>
                             <button class="carousel-control-prev" type="button"
-                                    data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                    data-bs-target="#carouselExampleIndicators-{{$key}}" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
                             </button>
                             <button class="carousel-control-next" type="button"
-                                    data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                    data-bs-target="#carouselExampleIndicators-{{$key}}" data-bs-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Next</span>
                             </button>
